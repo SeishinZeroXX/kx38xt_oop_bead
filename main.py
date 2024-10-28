@@ -44,7 +44,9 @@ def main():
                     
                     elerheto_autok = [auto for auto in kolcsonzo.autok if not any(
                         berles.auto.rendszam == auto.rendszam and 
-                        berles.kezdo_idopont <= kezdo_idopont < berles.vege_idopont
+                        (berles.kezdo_idopont <= kezdo_idopont < berles.vege_idopont or
+                         berles.kezdo_idopont < kezdo_idopont + timedelta(hours=24) <= berles.vege_idopont or
+                         kezdo_idopont <= berles.kezdo_idopont < kezdo_idopont + timedelta(hours=24))
                         for berles in kolcsonzo.berlesek
                     )]
                     
